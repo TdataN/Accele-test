@@ -181,14 +181,18 @@ function touchEnd( e ){
   if( motionData && motionData.length > 0 ){ 
     //. グラフ描画 
     var labels = []; 
-    var x_data = []; 
-    var y_data = []; 
+    var x_data = 0;
+    //var x_data = []; 
+    var y_data = 0;
+    //var y_data = [];
     //var z_data = []; 
     for( var i = 0; i < motionData.length; i ++ ){ 
       var mot = motionData[i]; 
       labels.push( '' + i ); 
-      x_data.push( mot['ac'].x ); 
-      y_data.push( mot['ac'].y ); 
+      x_data = x_data + mot['ac'].x;
+      //x_data.push( mot['ac'].x ); 
+      y_data = y_data + mot['ac'].y;
+      //y_data.push( mot['ac'].y ); 
       //z_data.push( mot['ac'].z ); 
     } 
 
