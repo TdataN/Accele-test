@@ -181,22 +181,22 @@ function touchEnd( e ){
   if( motionData && motionData.length > 0 ){ 
     //. グラフ描画 
     var labels = []; 
-    var x_data = []; 
-    var y_data = []; 
+    var x_data = null; 
+    var y_data = null; 
     //var z_data = []; 
     for( var i = 0; i < motionData.length; i ++ ){ 
       var mot = motionData[i]; 
       labels.push( '' + i ); 
-      x_data.push( mot['ac'].x ); 
-      y_data.push( mot['ac'].y ); 
+      x_data = x_data + mot['ac'].x; 
+      y_data = y_data + mot['ac'].y; 
       //z_data.push( mot['ac'].z ); 
     } 
-
 
     var ctx1 = document.getElementById( 'mychart1' ); 
     var myChart1 = new Chart( ctx1, { 
       type: 'line', 
-      data: { 
+      data: 
+      { 
         labels: labels, 
         datasets: [{ 
           label: 'x', 
@@ -246,7 +246,7 @@ function touchEnd( e ){
     motionData = []; 
   } 
 
-/*
+a/*
   if( orientationData && orientationData.length > 0 ){ 
     //. グラフ描画 
     var labels = []; 
