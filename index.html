@@ -12,9 +12,9 @@
 <style type="text/css"> 
 html, body{ 
   text-align: center; 
-  background-color: #fafafa; 
+  background-color: #ffffff; 
   font-size: 20px; 
-  color: #333; 
+  color: #00F; 
 } 
 body{ 
   background-color: #ffffcc; 
@@ -82,7 +82,8 @@ function init(){
     return false; 
   } 
 
-
+  // JavaScriptのイベント２つ「DeviceOrientationEvent」「DeviceMotionEvent」
+  // 「DeviceOrientationEvent」 デバイスの方向の変化を検出した時に発生
   if( window.DeviceOrientationEvent ){ 
     //. iOS 13 対応 : https://bagelee.com/webar-vr/ios13-webar-webvr/ 
     //.             : https://qiita.com/nakakaz11/items/a9be602874bd54819a18 
@@ -103,6 +104,7 @@ function init(){
       window.addEventListener( "deviceorientation", deviceOrientation ); 
     } 
   } 
+  // 「DeviceMotionEvent」デバイスの加速度の変化を検出した時に発生
   if( window.DeviceMotionEvent ){ 
     //. iOS 13 対応 : https://bagelee.com/webar-vr/ios13-webar-webvr/ 
     //.             : https://qiita.com/nakakaz11/items/a9be602874bd54819a18 
@@ -181,13 +183,13 @@ function touchEnd( e ){
     var labels = []; 
     var x_data = []; 
     var y_data = []; 
-    var z_data = []; 
+    //var z_data = []; 
     for( var i = 0; i < motionData.length; i ++ ){ 
       var mot = motionData[i]; 
       labels.push( '' + i ); 
       x_data.push( mot['ac'].x ); 
       y_data.push( mot['ac'].y ); 
-      z_data.push( mot['ac'].z ); 
+      //z_data.push( mot['ac'].z ); 
     } 
 
 
@@ -211,15 +213,16 @@ function touchEnd( e ){
           borderColor: '#55ff55', 
           fill: false, 
           data: y_data 
-        }, 
-        { 
-          label: 'z', 
-          borderWidth: 1, 
-          backgroundColor: '#aaaaff', 
-          borderColor: '#5555ff', 
-          fill: false, 
-          data: z_data 
-        }] 
+        } 
+        //,{ 
+        //  label: 'z', 
+        //  borderWidth: 1, 
+        //  backgroundColor: '#aaaaff', 
+        //  borderColor: '#5555ff', 
+        //  fill: false, 
+        //  data: z_data 
+        //}
+        ] 
       }, 
       options: { 
         title: { 
@@ -310,8 +313,11 @@ function touchEnd( e ){
 function deviceMotion( e ){ 
   e.preventDefault(); 
   if( isTouch ){ 
+    // 重力加速度を除いた加速度
     var ac = e.acceleration; 
+    // 重力加速度を含んだ生の加速度
     var acg = e.accelerationIncludingGravity; 
+    // 回転速度
     var rot = e.rotationRate; 
 
 
@@ -327,9 +333,9 @@ function deviceMotion( e ){
 function deviceOrientation( e ){ 
   e.preventDefault(); 
   if( isTouch ){ 
-    var gamma = e.gamma; //. Left/Right 
-    var beta = e.beta;   //. Front/Back 
-    var alpha = e.alpha; //. Direction 
+    var gamma = e.gamma; //. Left/Right 回転軸をY 軸とした回転データ
+    var beta = e.beta;   //. Front/Back 回転軸をX 軸とした回転データ
+    var alpha = e.alpha; //. Direction 回転軸をZ 軸とした回転データ
 
 
     var ori = {}; 
