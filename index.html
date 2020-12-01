@@ -246,7 +246,6 @@ function touchEnd( e ){
     motionData = []; 
   } 
 
-a/*
   if( orientationData && orientationData.length > 0 ){ 
     //. グラフ描画 
     var labels = []; 
@@ -304,7 +303,6 @@ a/*
     orientationData = []; 
   } 
 } 
-*/
   
 function deviceMotion( e ){ 
   e.preventDefault(); 
@@ -324,7 +322,7 @@ function deviceMotion( e ){
     motionData.push( motion ); 
   } 
 } 
-/*
+
 function deviceOrientation( e ){ 
   e.preventDefault(); 
   if( isTouch ){ 
@@ -342,7 +340,7 @@ function deviceOrientation( e ){
     orientationData.push( ori ); 
   } 
 }
-*/
+
 </script> 
 </body> 
 </html> 
